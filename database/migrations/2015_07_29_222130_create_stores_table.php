@@ -13,15 +13,14 @@ class CreateStoresTable extends Migration
     public function up()
     {
         Schema::create('stores', function (Blueprint $table) {
-            $table->increments('id', 11);
-            $table->integer('store_number')->unique;
+            $table->integer('id')->unsigned()->primary();
+            $table->string('store_number',11)->unique;
             $table->integer('banner_id')->unsigned();
             $table->integer('district_id')->unsigned();
             $table->integer('classification_id')->unsigned();
             $table->integer('status_id')->unsigned();
             $table->string('name',255);
             $table->string('address1', 255);
-            $table->string('address2', 255);
             $table->string('city', 255);
             $table->string('province', 255);
             $table->string('postal_code', 255);
