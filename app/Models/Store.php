@@ -10,6 +10,25 @@ final class Store extends Model
 {
 	protected $fillable = ['id', 'store_number', 'name', 'banner_id', 'province', 'city', 'sqft', 'mall_entrance', 'cashbanks' , 'district_id', 'classification_id', 'status_id']; 
 	
+	public static function getStoreList()
+	{
+		$stores = Store::select(
+                    \DB::raw("CONCAT (id, ' - ' , name, ' , ', city ) as label, id as value")
+                )->lists("label", "value");
+        
+        $searchList = [];
+        
+        foreach ($stores as $value => $label) {
+            $searchItem = [
+                'value' => $value,
+                'label' => $label,
+            ];
+            array_push($searchList, ($searchItem) );
+            
+        }   
+        
+        return ( json_encode ( $searchList ) );
+	}
 
 	public static function getStoreDetailsByStoreid($id)
 	{

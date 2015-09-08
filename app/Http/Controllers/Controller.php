@@ -30,5 +30,10 @@ class Controller extends BaseController
     {
     	return Store::getStoreDetailsByDistrictid($id);
     }
+    public function getStoreList()
+    {
+        // return "hello";
+        return Store::getStoreList() ;
+    }
 }
 
