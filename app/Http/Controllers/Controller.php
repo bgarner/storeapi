@@ -2,6 +2,7 @@
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 use App\Models\Store as Store;
+use App\Models\Banner as Banner;
 
 class Controller extends BaseController
 {
@@ -34,6 +35,11 @@ class Controller extends BaseController
     {
         // return "hello";
         return Store::getStoreList() ;
+    }
+
+    public function getBannerList()
+    {
+        return Banner::getBannerList();
     }
 }
 

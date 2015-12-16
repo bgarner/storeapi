@@ -16,7 +16,7 @@ $app->get('/', function() use ($app) {
 });
 
 $app->get('/stores', 'Controller@getStoreList');
-
+$app->get('/banners', 'Controller@getBannerList');
 $app->get('/store/{id}', 'Controller@getStoreByStoreid');
 $app->get('/banner/{id:\d+}', 'Controller@getStoreByBannerid');
 $app->get('/banner/{name:[a-zA-Z]+}', 'Controller@getStoreByBannername');
