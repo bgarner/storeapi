@@ -14,3 +14,17 @@
 $app->get('/', function() use ($app) {
     return $app->welcome();
 });
+
+$app->get('/stores', 'Controller@getStoreList');
+
+$app->get('/store/{id}', 'Controller@getStoreByStoreid');
+$app->get('/banner/{id:\d+}', 'Controller@getStoreByBannerid');
+$app->get('/banner/{name:[a-zA-Z]+}', 'Controller@getStoreByBannername');
+$app->get('/city/{name:[a-zA-Z]+}', 'Controller@getStoreByCity');
+$app->get('/province/{name:[a-zA-Z]+}', 'Controller@getStoreByProvince');
+$app->get('/district/{id:\d+}', 'Controller@getStoreByDistrictid');
+
+$app->get('/login', 'Auth\AuthController@getLogin');
+$app->post('/login', 'Auth\AuthController@postLogin');
+$app->get('/register', 'Auth\AuthController@getRegister');
+$app->post('/register', 'Auth\AuthController@postRegister');
