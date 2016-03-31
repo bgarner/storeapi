@@ -32,7 +32,8 @@ final class Store extends Model
 
 	public static function getStoreDetailsByStoreid($id)
 	{
-		$storedetails = Store::find($id);
+		//$storedetails = Store::find($id);
+		$storedetails = Store::where('store_number', $id)->first();
 		if ($storedetails) {
 			return $storedetails;
 		}else{
