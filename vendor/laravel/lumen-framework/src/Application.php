@@ -34,6 +34,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Monolog\Handler\SyslogHandler;
 
 class Application extends Container implements ApplicationContract, HttpKernelInterface
 {
@@ -655,8 +656,10 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     protected function getMonologHandler()
     {
-        return (new StreamHandler(storage_path('logs/lumen.log'), Logger::DEBUG))
-                            ->setFormatter(new LineFormatter(null, null, true, true));
+        // return (new StreamHandler(storage_path('logs/lumen.log'), Logger::DEBUG))
+        //                     ->setFormatter(new LineFormatter(null, null, true, true));
+        //                     
+        return new SyslogHandler('intranet', 'user', Logger::DEBUG, false, LOG_PID);                     
     }
 
     /**
