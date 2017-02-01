@@ -41,5 +41,10 @@ class Controller extends BaseController
     {
         return Banner::getBannerList();
     }
+
+    public function getAllStores()
+    {
+        return Store::getAllStores();
+    }
 }
 

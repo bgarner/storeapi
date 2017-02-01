@@ -89,5 +89,11 @@ final class Store extends Model
 		}
 	}
 
+	public static function getAllStores()
+	{
+		$stores = Store::select('id', 'store_id', 'store_number')->get();
+		return $stores;
+	}
+
 
 }
