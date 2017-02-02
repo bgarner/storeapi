@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Str;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Bus\Dispatcher;
 
 if (! function_exists('abort')) {
     /**
@@ -26,16 +27,15 @@ if (! function_exists('app')) {
      * Get the available container instance.
      *
      * @param  string  $make
-     * @param  array   $parameters
      * @return mixed|\Laravel\Lumen\Application
      */
-    function app($make = null, $parameters = [])
+    function app($make = null)
     {
         if (is_null($make)) {
             return Container::getInstance();
         }
 
-        return Container::getInstance()->make($make, $parameters);
+        return Container::getInstance()->make($make);
     }
 }
 
@@ -52,17 +52,29 @@ if (! function_exists('base_path')) {
     }
 }
 
-if (! function_exists('bcrypt')) {
+if (! function_exists('decrypt')) {
     /**
-     * Hash the given value.
+     * Decrypt the given value.
      *
      * @param  string  $value
-     * @param  array   $options
      * @return string
      */
-    function bcrypt($value, $options = [])
+    function decrypt($value)
     {
-        return app('hash')->make($value, $options);
+        return app('encrypter')->decrypt($value);
+    }
+}
+
+if (! function_exists('dispatch')) {
+    /**
+     * Dispatch a job to its appropriate handler.
+     *
+     * @param  mixed  $job
+     * @return mixed
+     */
+    function dispatch($job)
+    {
+        return app(Dispatcher::class)->dispatch($job);
     }
 }
 
@@ -90,49 +102,6 @@ if (! function_exists('config')) {
     }
 }
 
-if (! function_exists('cookie')) {
-    /**
-     * Create a new cookie instance.
-     *
-     * @param  string  $name
-     * @param  string  $value
-     * @param  int     $minutes
-     * @param  string  $path
-     * @param  string  $domain
-     * @param  bool    $secure
-     * @param  bool    $httpOnly
-     * @return \Symfony\Component\HttpFoundation\Cookie
-     */
-    function cookie($name = null, $value = null, $minutes = 0, $path = null, $domain = null, $secure = false, $httpOnly = true)
-    {
-        $cookie = app('cookie');
-
-        if (is_null($name)) {
-            return $cookie;
-        }
-
-        return $cookie->make($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
-    }
-}
-
-if (! function_exists('csrf_token')) {
-    /**
-     * Get the CSRF token value.
-     *
-     * @return string
-     *
-     * @throws RuntimeException
-     */
-    function csrf_token()
-    {
-        $session = app('session');
-        if (isset($session)) {
-            return $session->getToken();
-        }
-        throw new RuntimeException('Application session store not set.');
-    }
-}
-
 if (! function_exists('database_path')) {
     /**
      * Get the path to the database directory of the install.
@@ -143,6 +112,19 @@ if (! function_exists('database_path')) {
     function database_path($path = '')
     {
         return app()->databasePath().($path ? '/'.$path : $path);
+    }
+}
+
+if (! function_exists('encrypt')) {
+    /**
+     * Encrypt the given value.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    function encrypt($value)
+    {
+        return app('encrypter')->encrypt($value);
     }
 }
 
@@ -242,20 +224,6 @@ if (! function_exists('info')) {
     }
 }
 
-if (! function_exists('old')) {
-    /**
-     * Retrieve an old input item.
-     *
-     * @param  string  $key
-     * @param  mixed   $default
-     * @return mixed
-     */
-    function old($key = null, $default = null)
-    {
-        return app('request')->old($key, $default);
-    }
-}
-
 if (! function_exists('redirect')) {
     /**
      * Get an instance of the redirector.
@@ -278,6 +246,19 @@ if (! function_exists('redirect')) {
     }
 }
 
+if (! function_exists('resource_path')) {
+    /**
+     * Get the path to the resources folder.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function resource_path($path = '')
+    {
+        return app()->basePath().'/resources'.($path ? '/'.$path : $path);
+    }
+}
+
 if (! function_exists('response')) {
     /**
      * Return a new response from the application.
@@ -285,7 +266,7 @@ if (! function_exists('response')) {
      * @param  string  $content
      * @param  int     $status
      * @param  array   $headers
-     * @return \Symfony\Component\HttpFoundation\Response|\Laravel\Lumen\Http\ResponseFactory
+     * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory
      */
     function response($content = '', $status = 200, array $headers = [])
     {
@@ -305,37 +286,13 @@ if (! function_exists('route')) {
      *
      * @param  string  $name
      * @param  array   $parameters
+     * @param  bool    $secure
      * @return string
      */
-    function route($name, $parameters = [])
+    function route($name, $parameters = [], $secure = null)
     {
         return (new Laravel\Lumen\Routing\UrlGenerator(app()))
-                ->route($name, $parameters);
-    }
-}
-
-if (! function_exists('session')) {
-    /**
-     * Get / set the specified session value.
-     *
-     * If an array is passed as the key, we will assume you want to set an array of values.
-     *
-     * @param  array|string  $key
-     * @param  mixed  $default
-     * @return mixed
-     */
-    function session($key = null, $default = null)
-    {
-        $session = app('session');
-
-        if (is_null($key)) {
-            return $session;
-        }
-        if (is_array($key)) {
-            return $session->put($key);
-        }
-
-        return $session->get($key, $default);
+                ->route($name, $parameters, $secure);
     }
 }
 
@@ -369,23 +326,6 @@ if (! function_exists('trans')) {
         }
 
         return app('translator')->trans($id, $parameters, $domain, $locale);
-    }
-}
-
-if (! function_exists('trans_choice')) {
-    /**
-     * Translates the given message based on a count.
-     *
-     * @param  string  $id
-     * @param  int     $number
-     * @param  array   $parameters
-     * @param  string  $domain
-     * @param  string  $locale
-     * @return string
-     */
-    function trans_choice($id, $number, array $parameters = [], $domain = 'messages', $locale = null)
-    {
-        return app('translator')->transChoice($id, $number, $parameters, $domain, $locale);
     }
 }
 

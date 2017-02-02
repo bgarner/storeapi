@@ -63,6 +63,28 @@ abstract class Relation
     }
 
     /**
+     * Run a callback with constraints disabled on the relation.
+     *
+     * @param  \Closure  $callback
+     * @return mixed
+     */
+    public static function noConstraints(Closure $callback)
+    {
+        $previous = static::$constraints;
+
+        static::$constraints = false;
+
+        // When resetting the relation where clause, we want to shift the first element
+        // off of the bindings, leaving only the constraints that the developers put
+        // as "extra" on the relationships, and not original relation constraints.
+        try {
+            return call_user_func($callback);
+        } finally {
+            static::$constraints = $previous;
+        }
+    }
+
+    /**
      * Set the base constraints on the relation query.
      *
      * @return void
@@ -140,40 +162,31 @@ abstract class Relation
      * Add the constraints for a relationship count query.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  \Illuminate\Database\Eloquent\Builder  $parent
+     * @param  \Illuminate\Database\Eloquent\Builder  $parentQuery
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function getRelationCountQuery(Builder $query, Builder $parent)
+    public function getRelationExistenceCountQuery(Builder $query, Builder $parentQuery)
     {
-        $query->select(new Expression('count(*)'));
-
-        $key = $this->wrap($this->getQualifiedParentKeyName());
-
-        return $query->where($this->getHasCompareKey(), '=', new Expression($key));
+        return $this->getRelationExistenceQuery(
+            $query, $parentQuery, new Expression('count(*)')
+        );
     }
 
     /**
-     * Run a callback with constraints disabled on the relation.
+     * Add the constraints for an internal relationship existence query.
      *
-     * @param  \Closure  $callback
-     * @return mixed
+     * Essentially, these queries compare on column names like whereColumn.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder  $parentQuery
+     * @param  array|mixed $columns
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function noConstraints(Closure $callback)
+    public function getRelationExistenceQuery(Builder $query, Builder $parentQuery, $columns = ['*'])
     {
-        $previous = static::$constraints;
-
-        static::$constraints = false;
-
-        // When resetting the relation where clause, we want to shift the first element
-        // off of the bindings, leaving only the constraints that the developers put
-        // as "extra" on the relationships, and not original relation constraints.
-        try {
-            $results = call_user_func($callback);
-        } finally {
-            static::$constraints = $previous;
-        }
-
-        return $results;
+        return $query->select($columns)->whereColumn(
+            $this->getQualifiedParentKeyName(), '=', $this->getExistenceCompareKey()
+        );
     }
 
     /**
@@ -185,10 +198,9 @@ abstract class Relation
      */
     protected function getKeys(array $models, $key = null)
     {
-        return array_unique(array_values(array_map(function ($value) use ($key) {
+        return collect($models)->map(function ($value) use ($key) {
             return $key ? $value->getAttribute($key) : $value->getKey();
-
-        }, $models)));
+        })->values()->unique()->all();
     }
 
     /**
@@ -272,17 +284,6 @@ abstract class Relation
     }
 
     /**
-     * Wrap the given value with the parent query's grammar.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function wrap($value)
-    {
-        return $this->parent->newQueryWithoutScopes()->getQuery()->getGrammar()->wrap($value);
-    }
-
-    /**
      * Set or get the morph map for polymorphic relations.
      *
      * @param  array|null  $map
@@ -294,7 +295,8 @@ abstract class Relation
         $map = static::buildMorphMapFromModels($map);
 
         if (is_array($map)) {
-            static::$morphMap = $merge ? array_merge(static::$morphMap, $map) : $map;
+            static::$morphMap = $merge && static::$morphMap
+                            ? array_merge(static::$morphMap, $map) : $map;
         }
 
         return static::$morphMap;
@@ -312,11 +314,9 @@ abstract class Relation
             return $models;
         }
 
-        $tables = array_map(function ($model) {
+        return array_combine(array_map(function ($model) {
             return (new $model)->getTable();
-        }, $models);
-
-        return array_combine($tables, $models);
+        }, $models), $models);
     }
 
     /**
