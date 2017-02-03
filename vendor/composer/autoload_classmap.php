@@ -6,6 +6,19 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CreateBannersTable' => $baseDir . '/database/migrations/2017_02_02_225308_create_banners_table.php',
+    'CreateClassificationTable' => $baseDir . '/database/migrations/2017_02_02_235020_create_classification_table.php',
+    'CreateDistrictRegionPivot' => $baseDir . '/database/migrations/2017_02_02_234056_create_district_region_pivot.php',
+    'CreateDistrictStorePivot' => $baseDir . '/database/migrations/2017_02_02_233530_create_district_store_pivot.php',
+    'CreateDistrictsTable' => $baseDir . '/database/migrations/2017_02_02_233349_create_districts_table.php',
+    'CreateEquipmentUpdateTable' => $baseDir . '/database/migrations/2017_02_02_235250_create_equipment_update_table.php',
+    'CreateRegionsTable' => $baseDir . '/database/migrations/2017_02_02_234020_create_regions_table.php',
+    'CreateStatusTable' => $baseDir . '/database/migrations/2017_02_02_235051_create_store_status_table.php',
+    'CreateStoreBannerPivot' => $baseDir . '/database/migrations/2017_02_02_232846_create_store_banner_pivot.php',
+    'CreateStoreClassificationPivot' => $baseDir . '/database/migrations/2017_02_02_235206_create_store_classification_pivot.php',
+    'CreateStoreEquipmentUpdatePivot' => $baseDir . '/database/migrations/2017_02_02_235320_create_store_equipment_update_pivot.php',
+    'CreateStoreStatusPivot' => $baseDir . '/database/migrations/2017_02_02_235146_create_store_status_pivot.php',
+    'CreateStoresTable' => $baseDir . '/database/migrations/2017_02_02_224752_create_stores_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'ExampleTest' => $baseDir . '/tests/ExampleTest.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
