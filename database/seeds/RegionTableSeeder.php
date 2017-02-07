@@ -5,10 +5,10 @@ use Illuminate\Database\Seeder;
 class RegionTableSeeder extends Seeder
 {
     private $regions = [
-    	['name' => 'East' ],
-    	['name' => 'East' ],
-    	['name' => 'West' ],
-    	['name' => 'West' ]
+    	['name' => 'East', 'avp_name'=>'Jason Morris' ],
+    	['name' => 'East', 'avp_name' => 'Matt Lappin-Fortin'],
+    	['name' => 'West', 'avp_name' => 'Dax Brewster' ],
+    	['name' => 'West', 'avp_name' => 'Michael Poelzer' ]
     ];
 
     /**

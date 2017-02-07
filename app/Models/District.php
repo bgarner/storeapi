@@ -37,13 +37,14 @@ class District extends Model {
     }
     public static function getDistrictDetailsByRegionId($id)
     {
-    	$districts = District::join('district_region', 'district_region.region_id', '=', 'districts.id')
+        $districts = District::join('district_region', 'district_region.district_id', '=', 'districts.id')
 					                ->where('district_region.region_id', $id)
 					                ->select('districts.*')
 					                ->get()
 					                ->each(function($district){
     									$district->stores = Store::getStoreDetailsByDistrictId($district->id);
     								});
+
         if(count($districts)>0){
     		return $districts;
     	}

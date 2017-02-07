@@ -27,7 +27,7 @@ class Region extends Model {
     public static function getRegionDetailsByDistrictId($id)
     {
     	$region = Region::find($id);
-    	$region->districts = District::getDistrictDetailsByRegionId($region->id);
+    	$region->districts = District::getDistrictDetailsByRegionId($id);
     					
     	if(count($region)>0){
     		return $region;
