@@ -1,7 +1,7 @@
 <?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\BannerStore;
+use App\Models\Store;
 
 class Banner extends Model {
 
@@ -28,7 +28,7 @@ class Banner extends Model {
 
     public static function getStoreDetailsByBannerid($id)
 	{
-		$stores = BannerStore::join('stores','stores.id','=','banner_store.store_id')
+		$stores = Store::join('banner_store','stores.id','=','banner_store.store_id')
 					->where('banner_id', $id)
 					->get();
 		
@@ -42,7 +42,7 @@ class Banner extends Model {
 	public  static function getStoreDetailsByBannername($banner)
 	{
 		
-		$stores = BannerStore::join('stores','stores.id','=','banner_store.store_id')
+		$stores = Store::join('banner_store','stores.id','=','banner_store.store_id')
 					->join('banners', 'banners.id', '=', 'banner_store.banner_id')
 					->where('banners.name', $banner)
 					->get();
