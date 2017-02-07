@@ -22,6 +22,7 @@ class ComposerStaticInit3a46b409e8313b3358be64ade9a6b1e3
         ),
         'W' => 
         array (
+            'Wn\\Generators\\' => 14,
             'Webmozart\\Assert\\' => 17,
         ),
         'S' => 
@@ -102,6 +103,10 @@ class ComposerStaticInit3a46b409e8313b3358be64ade9a6b1e3
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'Wn\\Generators\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wn/lumen-generators/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -306,20 +311,26 @@ class ComposerStaticInit3a46b409e8313b3358be64ade9a6b1e3
     );
 
     public static $classMap = array (
+        'BannerStorePivotSeeder' => __DIR__ . '/../..' . '/database/seeds/BannerStorePivotSeeder.php',
+        'BannerTableSeeder' => __DIR__ . '/../..' . '/database/seeds/BannerTableSeeder.php',
+        'ClassificationTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ClassificationTableSeeder.php',
         'CreateBannersTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_225308_create_banners_table.php',
         'CreateClassificationTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_235020_create_classification_table.php',
-        'CreateDistrictRegionPivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_234056_create_district_region_pivot.php',
-        'CreateDistrictStorePivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_233530_create_district_store_pivot.php',
+        'CreateDistrictRegionPivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_234056_create_district_region_pivot.php',
+        'CreateDistrictStorePivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_233530_create_district_store_pivot.php',
         'CreateDistrictsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_233349_create_districts_table.php',
         'CreateEquipmentUpdateTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_235250_create_equipment_update_table.php',
         'CreateRegionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_234020_create_regions_table.php',
-        'CreateStatusTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_235051_create_store_status_table.php',
-        'CreateStoreBannerPivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_232846_create_store_banner_pivot.php',
-        'CreateStoreClassificationPivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_235206_create_store_classification_pivot.php',
-        'CreateStoreEquipmentUpdatePivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_235320_create_store_equipment_update_pivot.php',
-        'CreateStoreStatusPivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_235146_create_store_status_pivot.php',
+        'CreateStatusTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_235051_create_status_table.php',
+        'CreateStoreBannerPivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_232846_create_store_banner_pivot.php',
+        'CreateStoreClassificationPivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_235206_create_store_classification_pivot.php',
+        'CreateStoreEquipmentUpdatePivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_235320_create_store_equipment_update_pivot.php',
+        'CreateStoreStatusPivot' => __DIR__ . '/../..' . '/database/migrations/2017_02_03_235146_create_store_status_pivot.php',
         'CreateStoresTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_02_224752_create_stores_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
+        'DistrictRegionPivotSeeder' => __DIR__ . '/../..' . '/database/seeds/DistrictRegionPivotSeeder.php',
+        'DistrictStorePivotSeeder' => __DIR__ . '/../..' . '/database/seeds/DistrictStorePivotSeeder.php',
+        'DistrictTableSeeder' => __DIR__ . '/../..' . '/database/seeds/DistrictTableSeeder.php',
         'ExampleTest' => __DIR__ . '/../..' . '/tests/ExampleTest.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
@@ -770,6 +781,7 @@ class ComposerStaticInit3a46b409e8313b3358be64ade9a6b1e3
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'RegionTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RegionTableSeeder.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',
@@ -849,6 +861,8 @@ class ComposerStaticInit3a46b409e8313b3358be64ade9a6b1e3
         'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/recursion-context/src/InvalidArgumentException.php',
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'StatusTableSeeder' => __DIR__ . '/../..' . '/database/seeds/StatusTableSeeder.php',
+        'StoreTableSeeder' => __DIR__ . '/../..' . '/database/seeds/StoreTableSeeder.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
     );

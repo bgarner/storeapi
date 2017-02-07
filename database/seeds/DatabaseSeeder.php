@@ -11,6 +11,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call('UsersTableSeeder');
+        $this->call('BannerTableSeeder');
+        $this->call('StoreTableSeeder');
+        $this->call('DistrictTableSeeder');
+        $this->call('RegionTableSeeder');
+        $this->call('ClassificationTableSeeder');
+        $this->call('StatusTableSeeder');
+        $this->call('BannerStorePivotSeeder');
+        $this->call('DistrictStorePivotSeeder');
+        $this->call('DistrictRegionPivotSeeder');
+
     }
 }
