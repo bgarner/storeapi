@@ -67,7 +67,7 @@ class StoreTableSeeder extends Seeder
 
 	["store_id" => 143, "store_number" =>'0143', "is_combo_store" => 0, "name" => 'Kingston',"address"=>'Unit F5, 628 Gardiners Road', "city"=> 'KINGSTON', "province" => 'ON', "postal_code" => 'K7M 3X9', "lat" => 44.245838,  "long" =>  -76.563616, "sqft" => 10130, "mall_entrance" => 0, "entrances" => 1, "cashbanks" => 1,"floors" => 0,"registers" => 0,"pdts" => 0, "tablets" => 0, "last_reno" => '', "last_computer_update" =>''],
 
-	["store_id" => 155, "store_number" =>'0155', "is_combo_store" => 0, "name" => 'Deerfoot Meadows', "address"=>'Unit #500, 8180-11 Street SE',"city"=>' CALGARY', "province" => 'AB', "postal_code" => 'T2H 3B5', "lat" =>50.978314,  "long" => -114.041496, "sqft" => 7556.8, "mall_entrance" => 0, "entrances" => 1, "cashbanks" => 1,"floors" => 0,"registers" => 0,"pdts" => 0, "tablets" => 0, "last_reno" => '', "last_computer_update" =>''],
+	["store_id" => 155, "store_number" =>'0155', "is_combo_store" => 0, "name" => 'Deerfoot Meadows', "address"=>'Unit #500, 8180-11 Street SE',"city"=>'CALGARY', "province" => 'AB', "postal_code" => 'T2H 3B5', "lat" =>50.978314,  "long" => -114.041496, "sqft" => 7556.8, "mall_entrance" => 0, "entrances" => 1, "cashbanks" => 1,"floors" => 0,"registers" => 0,"pdts" => 0, "tablets" => 0, "last_reno" => '', "last_computer_update" =>''],
 
 	["store_id" => 158, "store_number" =>'0158', "is_combo_store" => 0, "name" => 'Southland Mall', "address"=> 'Unit 1Y1-C, 2715 Gordon Road', "city"=> 'Regina', "province" => 'SK', "postal_code" => 'S4S 6H8', "lat" => 50.403283,  "long" =>  -104.621711, "sqft" => 8879, "mall_entrance" => 1, "entrances" => 2, "cashbanks" => 2,"floors" => 0,"registers" => 0,"pdts" => 0, "tablets" => 0, "last_reno" => '', "last_computer_update" =>''],
 
@@ -205,7 +205,7 @@ class StoreTableSeeder extends Seeder
 
 	["store_id" => 279, "store_number" =>'0279', "is_combo_store" => 0, "name" => 'Sarnia',"address"=>'595 Murphy Road', "city"=> 'SARNIA', "province" => 'ON', "postal_code" => 'N7S 6K1', "lat" => 42.976700,  "long" =>  -82.366708, "sqft" => 31534, "mall_entrance" => 1, "entrances" => 1, "cashbanks" => 1,"floors" => 0,"registers" => 0,"pdts" => 0, "tablets" => 0, "last_reno" => '', "last_computer_update" =>''],
 
-	["store_id" => 280, "store_number" =>'0280', "is_combo_store" => 0, "name" => 'Fort McMurray',"address"=>'Unit #102, 19 Riedel Street',"city"=>' FORT MCMURRAY', "province" => 'AB', "postal_code" => 'T9H 3H8', "lat" => 56.722515,  "long" =>  -111.364260, "sqft" => 47397, "mall_entrance" => 1, "entrances" => 3, "cashbanks" => 2,"floors" => 0,"registers" => 0,"pdts" => 0, "tablets" => 0, "last_reno" => '', "last_computer_update" =>''],
+	["store_id" => 280, "store_number" =>'0280', "is_combo_store" => 0, "name" => 'Fort McMurray',"address"=>'Unit #102, 19 Riedel Street',"city"=>'FORT MCMURRAY', "province" => 'AB', "postal_code" => 'T9H 3H8', "lat" => 56.722515,  "long" =>  -111.364260, "sqft" => 47397, "mall_entrance" => 1, "entrances" => 3, "cashbanks" => 2,"floors" => 0,"registers" => 0,"pdts" => 0, "tablets" => 0, "last_reno" => '', "last_computer_update" =>''],
 
 	["store_id" => 281, "store_number" =>'0281', "is_combo_store" => 0, "name" => 'Southland Mall',"address"=>'Unit #96, 4307 130 Avenue SE', "city"=> 'CALGARY', "province" => 'AB', "postal_code" => 'T2Z 3V8', "lat" => 50.929350,  "long" =>  -113.972450, "sqft" => 18966, "mall_entrance" => 0, "entrances" => 1, "cashbanks" => 1,"floors" => 0,"registers" => 0,"pdts" => 0, "tablets" => 0, "last_reno" => '', "last_computer_update" =>''],
 

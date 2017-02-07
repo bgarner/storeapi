@@ -15,15 +15,26 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->get('/stores', 'Controller@getStoreList');
-$app->get('/storenumbers', 'Controller@getAllStores');
-$app->get('/banners', 'Controller@getBannerList');
-$app->get('/store/{id}', 'Controller@getStoreByStoreid');
-$app->get('/banner/{id:\d+}', 'Controller@getStoreByBannerid');
-$app->get('/banner/{name:[a-zA-Z]+}', 'Controller@getStoreByBannername');
-$app->get('/city/{name:[a-zA-Z]+}', 'Controller@getStoreByCity');
-$app->get('/province/{name:[a-zA-Z]+}', 'Controller@getStoreByProvince');
-$app->get('/district/{id:\d+}', 'Controller@getStoreByDistrictid');
+//store routes
+$app->get('/stores', 'Controller@getAllStores');
+$app->get('/stores/namelist', 'Controller@getAllStoreNameList');
+$app->get('/store/{id}', 'Controller@getStoreByStoreNumber');
+// $app->get('/stores?province={name:[a-zA-Z]+}', 'Controller@getAllStores');
+// $app->get('/stores?city={name:[a-zA-Z\+]+}', 'Controller@getAllStores');
+
+$app->get('/banners', 'Controller@getAllBanners');
+$app->get('/banner/{id:\d+}/stores', 'Controller@getStoresByBannerid');
+$app->get('/banner/{name:[a-zA-Z]+}/stores', 'Controller@getStoreByBannername');
+
+$app->get('/districts', 'Controller@getAllDistricts');
+$app->get('/district/{id}', 'Controller@getDistrictByDistrictId');
+$app->get('/district/{id:\d+}/stores', 'Controller@getStoresByDistrictId');
+
+$app->get('/regions', 'Controller@getAllRegions');
+$app->get('/region/{id}', 'Controller@getRegionByRegionId');
+$app->get('/region/{id:\d+}/districts', 'Controller@getDistrictsByRegionId');
+
+
 $app->get('/login', 'Auth\AuthController@getLogin');
 $app->post('/login', 'Auth\AuthController@postLogin');
 $app->get('/register', 'Auth\AuthController@getRegister');

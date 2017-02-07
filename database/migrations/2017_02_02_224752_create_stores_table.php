@@ -23,6 +23,9 @@ class CreateStoresTable extends Migration
             $table->string('city', 255);
             $table->string('province', 255);
             $table->string('postal_code', 255);
+            $table->string('phone', 255);
+            $table->string('fax', 255);
+            $table->string('email', 255);
             $table->double('lat', 9,6);
             $table->double('long', 9,6);
             $table->double('sqft');
