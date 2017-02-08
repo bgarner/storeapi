@@ -23,7 +23,7 @@ class Store extends Model {
     		return Store::getStoreDetailsByCity($request->city);
     	}
     	
-    	return Store::join('banner_store', 'banner_store.store_id', '=', 'stores.id')->get();	
+    	return Store::join('banner_store', 'banner_store.store_id', '=', 'stores.id')->select('stores.*', 'banner_store.banner_id')->get();	
     	
     	
     }
@@ -49,6 +49,7 @@ class Store extends Model {
 	{
 		$storedetails = Store::join('banner_store', 'banner_store.store_id', '=', 'stores.id')
 								->where('store_number', $id)
+								->select('stores.*', 'banner_store.banner_id')
 								->first();
 		if ($storedetails) {
 			return $storedetails;
@@ -60,7 +61,9 @@ class Store extends Model {
 	public static function getStoreDetailsByProvince($province)
 	{
 		$stores = Store::join('banner_store', 'banner_store.store_id', '=', 'stores.id')
-						->where('province', $province)->get();
+						->where('province', $province)
+						->select('stores.*', 'banner_store.banner_id')
+						->get();
 		if (count($stores) > 0) {
 			return $stores;
 		}else {
@@ -71,7 +74,9 @@ class Store extends Model {
 	{
 		$city = preg_replace("/\+/", " " , $city);
 		$stores = Store::join('banner_store', 'banner_store.store_id', '=', 'stores.id')
-						->where('city', $city)->get();
+						->where('city', $city)
+						->select('stores.*', 'banner_store.banner_id')
+						->get();
 		if ( count($stores) > 0) {
 			return $stores;
 		}else {
@@ -85,6 +90,7 @@ class Store extends Model {
     	$stores = Store::join('district_store', 'district_store.store_id', '=', 'stores.id')
     					->join('banner_store', 'banner_store.store_id', '=', 'stores.id')
 		                ->where('district_store.district_id', $id)
+		                ->select('stores.*', 'banner_store.banner_id')
 		                ->get();
         if(count($stores)>0){
     		return $stores;
