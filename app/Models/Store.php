@@ -23,7 +23,7 @@ class Store extends Model {
     		return Store::getStoreDetailsByCity($request->city);
     	}
     	
-    	return Store::all();	
+    	return Store::join('banner_store', 'banner_store.store_id', '=', 'stores.id')->get();	
     	
     	
     }
@@ -47,7 +47,9 @@ class Store extends Model {
 
 	public static function getStoreDetailsByStoreNumber($id)
 	{
-		$storedetails = Store::where('store_number', $id)->first();
+		$storedetails = Store::join('banner_store', 'banner_store.store_id', '=', 'stores.id')
+								->where('store_number', $id)
+								->first();
 		if ($storedetails) {
 			return $storedetails;
 		}else{
@@ -57,7 +59,8 @@ class Store extends Model {
 	
 	public static function getStoreDetailsByProvince($province)
 	{
-		$stores = Store::where('province', $province)->get();
+		$stores = Store::join('banner_store', 'banner_store.store_id', '=', 'stores.id')
+						->where('province', $province)->get();
 		if (count($stores) > 0) {
 			return $stores;
 		}else {
@@ -67,7 +70,8 @@ class Store extends Model {
 	public static function getStoreDetailsByCity($city)
 	{
 		$city = preg_replace("/\+/", " " , $city);
-		$stores = Store::where('city', $city)->get();
+		$stores = Store::join('banner_store', 'banner_store.store_id', '=', 'stores.id')
+						->where('city', $city)->get();
 		if ( count($stores) > 0) {
 			return $stores;
 		}else {
@@ -79,9 +83,9 @@ class Store extends Model {
 	public static function getStoreDetailsByDistrictId($id)
     {
     	$stores = Store::join('district_store', 'district_store.store_id', '=', 'stores.id')
-					                ->where('district_store.district_id', $id)
-					                ->select('stores.*')
-					                ->get();
+    					->join('banner_store', 'banner_store.store_id', '=', 'stores.id')
+		                ->where('district_store.district_id', $id)
+		                ->get();
         if(count($stores)>0){
     		return $stores;
     	}
