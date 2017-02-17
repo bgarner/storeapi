@@ -30,6 +30,7 @@ class Banner extends Model {
 	{
 		$stores = Store::join('banner_store','stores.id','=','banner_store.store_id')
 					->where('banner_id', $id)
+					->select('stores.*', 'banner_store.banner_id')
 					->get();
 		
 		if (count($stores) > 0) {
@@ -45,6 +46,7 @@ class Banner extends Model {
 		$stores = Store::join('banner_store','stores.id','=','banner_store.store_id')
 					->join('banners', 'banners.id', '=', 'banner_store.banner_id')
 					->where('banners.name', $banner)
+					->select('stores.*', 'banner_store.banner_id')
 					->get();
 
 		if (count($stores) > 0) {

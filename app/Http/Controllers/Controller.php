@@ -29,6 +29,10 @@ class Controller extends BaseController
     {
     	return Store::getStoreDetailsByDistrictId($id);
     }
+    public static function getStoresByRegionId($id)
+    {
+        return Store::getStoreDetailsByRegionId($id);
+    }
 
     /* Banners */
     public function getAllBanners()

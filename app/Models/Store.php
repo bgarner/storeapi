@@ -96,6 +96,23 @@ class Store extends Model {
     		return $stores;
     	}
     	return [];
-    } 
+    }
+
+    public static function getStoreDetailsByRegionId($id)
+    {
+
+    	$districts = District::getDistrictDetailsByRegionId($id);
+    	$stores = [];
+    	foreach($districts as $district){
+    		foreach ($district->stores as $store) {
+    			array_push($stores, $store);
+    		}
+    		
+    	}
+        if(count($stores)>0){
+    		return $stores;
+    	}
+    	return [];
+    }
 
 }
