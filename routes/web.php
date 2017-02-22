@@ -33,6 +33,7 @@ $app->get('/district/{id:\d+}/stores', 'Controller@getStoresByDistrictId');
 $app->get('/regions', 'Controller@getAllRegions');
 $app->get('/region/{id}', 'Controller@getRegionByRegionId');
 $app->get('/region/{id:\d+}/districts', 'Controller@getDistrictsByRegionId');
+$app->get('/region/{id:\d+}/stores', 'Controller@getStoresByRegionId');
 
 
 $app->get('/login', 'Auth\AuthController@getLogin');
