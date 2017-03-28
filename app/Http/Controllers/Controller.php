@@ -77,4 +77,9 @@ class Controller extends BaseController
     	return Region::getRegionDetailsByDistrictId($id);
     }
     
+
+    public function ui()
+    {
+        return view('ui');
+    }
 }
